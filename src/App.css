@@ -1,0 +1,38 @@
+body{
+  margin: 0;
+  text-align: center;
+}
+.header{
+  background-color: #c5e2c5;
+  padding: 1rem;
+  width: 100%;
+  font-size: xx-large;
+  font-weight: 700;
+}
+.form{
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    width: 60%;
+    margin-inline: auto;
+}
+.list{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 28px;
+}
+Button{
+ justify-self: flex-end;
+}
