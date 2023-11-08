@@ -14,22 +14,31 @@ const Records = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [data, setData] = useState([]);
-  const [ modal , setModal] = useState({name: '', email: ''})
+  const [ modal , setModal] = useState({name: '', email: '', index: -1})
 
   const [open, setOpen] = React.useState(false);
-  let userName, userEmail
 
   const handleOpen = (index) =>{
-    const foundElement  = data[index];
-    setModal(foundElement) 
    
-    console.log('userName', userName)
-    console.log('userEmail', userEmail)
+    const foundElement  = data[index];
+    setModal({ name: foundElement.name, email: foundElement.email, index });
+    
     setOpen(true);
   }
   const handleClose = () => setOpen(false);
 
-  function addData() {
+  const saveChanges =()=>{
+    const { name , email , index} = modal;
+    if (index !== -1) {
+      let updateData = [ ...data]
+      updateData[index] = {name, email}
+      setData(updateData)
+    }
+   
+    setOpen(false)
+  }
+
+  const addData = () => {
     setData([...data, { name, email }]);
     setName("");
     setEmail("");
@@ -115,10 +124,10 @@ const Records = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TextField value={modal.name} id="standard-basic" label="Name" variant="standard"/>
-          <TextField value={modal.email} id="standard-basic" label="Email" variant="standard" style={{marginTop: "20px"}}/>
+          <TextField value={modal.name} onChange={(e)=>setModal({...modal, name: e.target.value})} id="standard-basic" label="Name" variant="standard"/>
+          <TextField value={modal.email} onChange={(e)=>setModal({...modal, email: e.target.value})} id="standard-basic" label="Email" variant="standard" style={{marginTop: "20px"}}/>
           <div style={{ marginTop: "60px" }}>
-            <Button variant="outlined" color="success" style={{marginRight: "20px"}}>
+            <Button onClick={saveChanges} variant="outlined" color="success" style={{marginRight: "20px"}}>
               <FileDownloadDoneOutlinedIcon />
             </Button>
             <Button onClick={handleClose} variant="outlined" color="error">
